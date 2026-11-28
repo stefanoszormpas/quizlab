@@ -131,7 +131,7 @@ function vectorPhysics(){let b=vectorDirs[vectorB],u=vectorDirs[vectorU],dot=vd(
 function vectorScene(t){const z=vectorPhysics(),{b,u,dot,q,speed,B,omega,active}=z;const side=vc(u,b),sg=Math.sign(omega);
 const pos=f=>active?va(vs(u,Math.sin(2*Math.PI*f)),vs(side,sg*(1-Math.cos(2*Math.PI*f)))):vs(u,speed>eps?2*f:0);
 const vel=f=>active?va(vs(u,Math.cos(2*Math.PI*f)),vs(side,sg*Math.sin(2*Math.PI*f))):u;
-const proj=v=>vectorFixed?[.866*v[0]-.866*v[1],.5*v[0]+.5*v[1]-v[2]]:project3(v);
+const proj=v=>vectorFixed?[(-v[0]+v[1])/Math.sqrt(2),(v[0]+v[1]-2*v[2])/Math.sqrt(6)]:project3(v);
 const scale=52,P=v=>{let p=proj(v);return [390+p[0]*scale,180+p[1]*scale]},O=P([0,0,0]);
 let out='<rect x="190" y="29" width="400" height="315" rx="8" fill="#0b1628" stroke="#45607e"/>';
 for(let i=0;i<3;i++){let d=vectorDirs[2*i],a=P(vs(d,-2.35)),b=P(vs(d,2.35)),pre=P(vs(d,2.05));out+=line(...a,...b,muted,1,'4 4')+arrow(...pre,b[0]-pre[0],b[1]-pre[1],muted,['x','y','z'][i]);}out+=label(O[0]-12,O[1]+14,'O',muted);
